@@ -348,6 +348,23 @@
                     </div>
                 </div>
             </div>
+            <div class="map-container">
+                <h3>Find Us</h3>
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps?q=C6+Level+1/2+Hector+Ct+Kellyville+NSW+2155&output=embed" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Gilly's Breakfast & Lunch Location">
+                    </iframe>
+                </div>
+                <p class="map-note">
+                    <a href="https://www.google.com/maps/search/?api=1&query=C6+Level+1/2+Hector+Ct+Kellyville+NSW+2155" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Open in Google Maps
+                    </a>
+                </p>
+            </div>
             <div class="opening-hours">
                 <h3>Opening Hours</h3>
                 <p>Monday – Sunday: 6am – 4pm</p>
@@ -382,10 +399,54 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Copyright © 2024 Gilly's Cafe. All Rights Reserved.</p>
+                <p>Copyright © 2025 Gilly's Cafe. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-header-content">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="chatbot-info">
+                    <h3>Gilly's Cafe</h3>
+                    <p>We're here to help!</p>
+                </div>
+            </div>
+            <button class="chatbot-close" id="chatbotClose" aria-label="Close chatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot-message">
+                <div class="message-content">
+                    <p>Hello! Welcome to Gilly's Cafe! 👋</p>
+                    <p>How can I help you today? You can ask me about:</p>
+                    <ul>
+                        <li>Our menu items</li>
+                        <li>Opening hours</li>
+                        <li>Reservations</li>
+                        <li>Location & directions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-container">
+            <input type="text" id="chatbotInput" placeholder="Type your message..." aria-label="Chatbot input">
+            <button id="chatbotSend" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chatbot">
+        <i class="fas fa-comments"></i>
+        <span class="chatbot-badge">1</span>
+    </button>
 
     <script src="script.js"></script>
 </body>
