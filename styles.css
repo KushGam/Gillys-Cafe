@@ -1230,6 +1230,7 @@ section {
     background: var(--bg-main);
 }
 
+
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -2171,6 +2172,7 @@ section {
         font-size: 2rem;
         letter-spacing: 1px;
     }
+
 
     .menu-items-container {
         grid-template-columns: 1fr;

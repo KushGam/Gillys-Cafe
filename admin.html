@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gillys Breakfast & Lunch</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-card">
+                <h1><i class="fas fa-shield-alt"></i> Admin Login</h1>
+                <p>Gillys Breakfast & Lunch Dashboard</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="adminEmail">Email</label>
+                        <input type="email" id="adminEmail" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <div id="loginError" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header-content">
+                <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+                <div class="admin-actions">
+                    <a href="/" class="btn-secondary" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> View Website
+                    </a>
+                    <button class="btn-secondary" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Sidebar Navigation -->
+            <aside class="admin-sidebar">
+                <nav class="admin-nav">
+                    <button class="nav-item active" data-section="menu">
+                        <i class="fas fa-utensils"></i> Menu Management
+                    </button>
+                    <button class="nav-item" data-section="pricing">
+                        <i class="fas fa-dollar-sign"></i> Pricing
+                    </button>
+                    <button class="nav-item" data-section="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Menu Management Section -->
+                <section id="menuSection" class="admin-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-utensils"></i> Menu Management</h2>
+                        <button class="btn-primary" id="addMenuItemBtn">
+                            <i class="fas fa-plus"></i> Add Menu Item
+                        </button>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="category-filter">
+                        <button class="filter-btn active" data-category="all">All Items</button>
+                        <button class="filter-btn" data-category="breakfast">Breakfast</button>
+                        <button class="filter-btn" data-category="lunch">Lunch & Mains</button>
+                        <button class="filter-btn" data-category="small-plates">Small Plates</button>
+                        <button class="filter-btn" data-category="coffee">Coffee & Hot Drinks</button>
+                        <button class="filter-btn" data-category="cold">Cold Beverages</button>
+                        <button class="filter-btn" data-category="desserts">Desserts</button>
+                    </div>
+
+                    <!-- Menu Items List -->
+                    <div class="menu-items-grid" id="menuItemsGrid">
+                        <!-- Menu items will be dynamically loaded here -->
+                    </div>
+                </section>
+
+                <!-- Pricing Section -->
+                <section id="pricingSection" class="admin-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dollar-sign"></i> Bulk Pricing Update</h2>
+                    </div>
+                    <div class="pricing-tools">
+                        <div class="tool-card">
+                            <h3>Update All Prices</h3>
+                            <p>Apply a percentage increase or decrease to all menu items</p>
+                    <div class="pricing-input-group">
+                        <label for="pricePercentage" class="sr-only">Price percentage change</label>
+                        <input type="number" id="pricePercentage" step="0.1" placeholder="e.g., 10 for 10% increase" aria-label="Price percentage change">
+                        <span>%</span>
+                        <button class="btn-primary" id="applyPriceChangeBtn">Apply</button>
+                    </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settingsSection" class="admin-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3>Change Password</h3>
+                            <form id="changePasswordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" required>
+                                </div>
+                                <button type="submit" class="btn-primary">Update Password</button>
+                            </form>
+                        </div>
+                        <div class="setting-card hidden" id="coAdminCard">
+                            <h3>Co-Admin Management</h3>
+                            <p class="co-admin-description">
+                                Co-admins can manage menus and settings but cannot add new admins.
+                            </p>
+                            <div id="coAdminList" class="co-admin-list">
+                                <!-- Co-admins will be listed here -->
+                            </div>
+                            <form id="addCoAdminForm">
+                                <div class="form-group">
+                                    <label for="coAdminEmail">Co-Admin Email</label>
+                                    <input type="email" id="coAdminEmail" required placeholder="Enter email address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="coAdminPassword">Initial Password</label>
+                                    <input type="password" id="coAdminPassword" required placeholder="Set initial password">
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-user-plus"></i> Add Co-Admin
+                                </button>
+                            </form>
+                        </div>
+                        <div class="setting-card">
+                            <h3>Data Management</h3>
+                            <div class="data-actions">
+                                <button class="btn-primary" id="migrateMenuBtn">
+                                    <i class="fas fa-sync"></i> Migrate Menu from HTML
+                                </button>
+                                <button class="btn-secondary" id="exportDataBtn">
+                                    <i class="fas fa-download"></i> Export Data
+                                </button>
+                                <button class="btn-secondary" id="importDataBtn">
+                                    <i class="fas fa-upload"></i> Import Data
+                                </button>
+                                <input type="file" id="importFileInput" accept=".json" class="hidden" aria-label="Import data file">
+                                <button class="btn-danger" id="resetDataBtn">
+                                    <i class="fas fa-trash"></i> Reset to Default
+                                </button>
+                            </div>
+                            <p class="data-management-note">
+                                <strong>Note:</strong> Click "Migrate Menu from HTML" to extract existing menu items from index.html and populate the dashboard.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Menu Item Modal -->
+    <div id="menuItemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Menu Item</h2>
+                <button class="modal-close" id="closeModalBtn" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="menuItemForm">
+                <div class="form-group">
+                    <label for="itemName">Item Name *</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category *</label>
+                    <select id="itemCategory" required>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch & Mains</option>
+                        <option value="small-plates">Small Plates</option>
+                        <option value="coffee">Coffee & Hot Drinks</option>
+                        <option value="cold">Cold Beverages</option>
+                        <option value="desserts">Desserts</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description *</label>
+                    <textarea id="itemDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemPrice">Price *</label>
+                    <input type="number" id="itemPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemImage">Image URL</label>
+                    <input type="text" id="itemImage" placeholder="e.g., image.jpg or leave empty for icon">
+                    <small>Leave empty to use an icon, or enter image filename</small>
+                </div>
+                <div class="form-group">
+                    <label for="itemIcon">Icon Class (if no image)</label>
+                    <input type="text" id="itemIcon" placeholder="e.g., fas fa-coffee">
+                    <small>Font Awesome icon class (only used if no image URL)</small>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="itemHasSizeOptions">
+                        Has Size Options (Regular/Large)
+                    </label>
+                </div>
+                <div id="sizeOptionsContainer" class="hidden">
+                    <div class="form-group">
+                        <label for="itemPriceRegular">Regular Price</label>
+                        <input type="number" id="itemPriceRegular" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemPriceLarge">Large Price</label>
+                        <input type="number" id="itemPriceLarge" step="0.01" min="0">
+                    </div>
+                </div>
+                <input type="hidden" id="itemId">
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelModalBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin.js"></script>
+</body>
+</html>
+

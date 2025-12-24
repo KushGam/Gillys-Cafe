@@ -1,3 +1,115 @@
+// Menu Data Management
+let menuItemsData = [];
+
+// Load menu items from localStorage or use HTML fallback
+function loadMenuItemsData() {
+    const stored = localStorage.getItem('menuItems');
+    if (stored) {
+        try {
+            menuItemsData = JSON.parse(stored);
+            if (menuItemsData.length > 0) {
+                renderMenuFromData();
+                return true;
+            }
+        } catch (e) {
+            console.error('Error parsing menu items:', e);
+        }
+    }
+    return false; // Use HTML fallback
+}
+
+// Render menu from data
+function renderMenuFromData() {
+    if (menuItemsData.length === 0) return;
+    
+    // Group items by category
+    const categories = {
+        'breakfast': [],
+        'lunch': [],
+        'small-plates': [],
+        'coffee': [],
+        'cold': [],
+        'desserts': []
+    };
+    
+    menuItemsData.forEach(item => {
+        if (categories[item.category]) {
+            categories[item.category].push(item);
+        }
+    });
+    
+    // Render each category section
+    Object.keys(categories).forEach(category => {
+        const sectionId = category === 'lunch' ? 'lunch-section' : 
+                         category === 'small-plates' ? 'small-plates-section' :
+                         category === 'coffee' ? 'coffee-section' :
+                         category === 'cold' ? 'drinks-section' :
+                         category === 'desserts' ? 'desserts-section' :
+                         'breakfast-section';
+        
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        
+        const itemsContainer = section.querySelector('.menu-section-items');
+        if (!itemsContainer) return;
+        
+        // Clear existing items
+        itemsContainer.innerHTML = '';
+        
+        // Render items
+        categories[category].forEach(item => {
+            const card = createMenuItemCard(item);
+            itemsContainer.appendChild(card);
+        });
+    });
+}
+
+// Create menu item card element
+function createMenuItemCard(item) {
+    const card = document.createElement('div');
+    card.className = 'menu-item-card';
+    card.setAttribute('data-category', item.category);
+    
+    // Image or icon
+    let imageHtml = '';
+    if (item.image) {
+        imageHtml = `<div class="menu-item-image"><img src="${item.image}" alt="${item.name}"></div>`;
+    } else if (item.icon) {
+        const iconClass = item.icon.includes('coffee-image') ? 'coffee-image' : 
+                         item.icon.includes('drink') ? 'drink-image' : 'coffee-image';
+        imageHtml = `<div class="menu-item-image ${iconClass}"><i class="${item.icon}"></i></div>`;
+    } else {
+        imageHtml = `<div class="menu-item-image coffee-image"><i class="fas fa-utensils"></i></div>`;
+    }
+    
+    // Price display
+    let priceHtml = '';
+    if (item.hasSizeOptions) {
+        priceHtml = `<div class="price-options">
+            <span class="price-regular">$${item.priceRegular || item.price || '0.00'}</span>
+            <span class="price-separator">/</span>
+            <span class="price-large">$${item.priceLarge || item.price || '0.00'}</span>
+        </div>`;
+    } else {
+        priceHtml = `<span class="price">$${item.price || '0.00'}</span>`;
+    }
+    
+    card.innerHTML = `
+        ${imageHtml}
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+        ${priceHtml}
+    `;
+    
+    return card;
+}
+
+// Initialize menu on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Try to load from localStorage, fallback to HTML
+    loadMenuItemsData();
+});
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -617,4 +729,5 @@ document.addEventListener('keydown', (e) => {
         document.body.style.overflow = '';
     }
 });
+
 

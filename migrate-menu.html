@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrate Menu Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8B4513;
+        }
+        button {
+            background: #8B4513;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #6B3410;
+        }
+        .success {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #2196F3;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Menu Items Migration Tool</h1>
+        <p>This tool will extract menu items from index.html and save them to localStorage for the admin dashboard.</p>
+        
+        <button onclick="loadAndExtract()">1. Load index.html & Extract Menu Items</button>
+        <button onclick="checkStorage()">2. Check Stored Items</button>
+        <button onclick="clearStorage()">3. Clear Storage</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function loadAndExtract() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="info">Loading index.html...</div>';
+            
+            try {
+                const response = await fetch('index.html');
+                const html = await response.text();
+                
+                // Create a temporary DOM to parse
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const menuCards = doc.querySelectorAll('.menu-item-card');
+                const menuItems = [];
+                
+                const categoryMap = {
+                    'breakfast': 'breakfast',
+                    'lunch': 'lunch',
+                    'small-plates': 'small-plates',
+                    'coffee': 'coffee',
+                    'drinks': 'cold',
+                    'desserts': 'desserts'
+                };
+                
+                menuCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const name = card.querySelector('h3')?.textContent.trim();
+                    const description = card.querySelector('p')?.textContent.trim();
+                    const priceText = card.querySelector('.price')?.textContent.trim();
+                    const price = parseFloat(priceText?.replace('$', '') || '0');
+                    
+                    // Check for image or icon
+                    const imageElement = card.querySelector('.menu-item-image img');
+                    const iconElement = card.querySelector('.menu-item-image.coffee-image i, .menu-item-image.drink-image i');
+                    
+                    let image = '';
+                    let icon = '';
+                    
+                    if (imageElement) {
+                        image = imageElement.getAttribute('src') || '';
+                    } else if (iconElement) {
+                        icon = iconElement.getAttribute('class') || '';
+                    }
+                    
+                    // Check for size options
+                    const priceOptions = card.querySelector('.price-options');
+                    let hasSizeOptions = false;
+                    let priceRegular = null;
+                    let priceLarge = null;
+                    
+                    if (priceOptions) {
+                        hasSizeOptions = true;
+                        const regularPrice = priceOptions.querySelector('.price-regular')?.textContent;
+                        const largePrice = priceOptions.querySelector('.price-large')?.textContent;
+                        priceRegular = regularPrice ? parseFloat(regularPrice.replace('$', '')) : null;
+                        priceLarge = largePrice ? parseFloat(largePrice.replace('$', '')) : null;
+                    }
+                    
+                    const mappedCategory = categoryMap[category] || category || 'breakfast';
+                    
+                    if (name) {
+                        menuItems.push({
+                            name: name,
+                            category: mappedCategory,
+                            description: description || '',
+                            price: hasSizeOptions ? null : price,
+                            image: image,
+                            icon: icon,
+                            hasSizeOptions: hasSizeOptions,
+                            priceRegular: priceRegular,
+                            priceLarge: priceLarge
+                        });
+                    }
+                });
+                
+                if (menuItems.length > 0) {
+                    localStorage.setItem('menuItems', JSON.stringify(menuItems));
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <strong>Success!</strong> Extracted ${menuItems.length} menu items and saved to localStorage.
+                            <br><br>
+                            <strong>Categories:</strong><br>
+                            ${Object.entries(menuItems.reduce((acc, item) => {
+                                acc[item.category] = (acc[item.category] || 0) + 1;
+                                return acc;
+                            }, {})).map(([cat, count]) => `${cat}: ${count}`).join('<br>')}
+                            <br><br>
+                            <a href="admin.html" style="color: white; text-decoration: underline;">Go to Admin Dashboard →</a>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<div class="info">No menu items found. Make sure index.html is in the same directory.</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div style="background: #f44336; color: white; padding: 15px; border-radius: 5px;">Error: ${error.message}</div>`;
+            }
+        }
+        
+        function checkStorage() {
+            const stored = localStorage.getItem('menuItems');
+            const resultDiv = document.getElementById('result');
+            
+            if (stored) {
+                try {
+                    const items = JSON.parse(stored);
+                    resultDiv.innerHTML = `
+                        <div class="info">
+                            <strong>Found ${items.length} items in localStorage</strong><br><br>
+                            <strong>Categories:</strong><br>
+                            ${Object.entries(items.reduce((acc, item) => {
+                                acc[item.category] = (acc[item.category] || 0) + 1;
+                                return acc;
+                            }, {})).map(([cat, count]) => `${cat}: ${count}`).join('<br>')}
+                            <br><br>
+                            <a href="admin.html" style="color: white; text-decoration: underline;">Go to Admin Dashboard →</a>
+                        </div>
+                    `;
+                } catch (e) {
+                    resultDiv.innerHTML = '<div style="background: #f44336; color: white; padding: 15px; border-radius: 5px;">Error parsing stored data</div>';
+                }
+            } else {
+                resultDiv.innerHTML = '<div class="info">No items found in localStorage. Click "Load index.html & Extract Menu Items" first.</div>';
+            }
+        }
+        
+        function clearStorage() {
+            if (confirm('Are you sure you want to clear all menu items from localStorage?')) {
+                localStorage.removeItem('menuItems');
+                document.getElementById('result').innerHTML = '<div class="info">Storage cleared!</div>';
+            }
+        }
+    </script>
+</body>
+</html>
+
