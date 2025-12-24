@@ -135,8 +135,13 @@ document.querySelectorAll('.btn-primary, .btn-outline').forEach(button => {
         const buttonText = this.textContent.trim();
         
         if (buttonText.includes('Order')) {
-            // You can add order functionality here
-            alert('Order functionality coming soon!');
+            // Show order modal
+            e.preventDefault();
+            const orderModal = document.getElementById('orderModal');
+            if (orderModal) {
+                orderModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         } else if (buttonText.includes('Reserve') || buttonText.includes('Reservation')) {
             // Scroll to reservation section
             e.preventDefault();
@@ -580,4 +585,36 @@ if (themeToggleMobile) {
         toggleTheme();
     });
 }
+
+// Order Modal Functionality
+const orderModal = document.getElementById('orderModal');
+const orderModalClose = document.getElementById('orderModalClose');
+
+// Close modal when close button is clicked
+if (orderModalClose) {
+    orderModalClose.addEventListener('click', () => {
+        if (orderModal) {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Close modal when clicking outside
+if (orderModal) {
+    orderModal.addEventListener('click', (e) => {
+        if (e.target === orderModal) {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && orderModal && orderModal.classList.contains('active')) {
+        orderModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
 
