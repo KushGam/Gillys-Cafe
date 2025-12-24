@@ -908,6 +908,26 @@ section {
     padding: 0 1.5rem 1.5rem;
 }
 
+.menu-item-card .price-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1.5rem 1.5rem;
+}
+
+.menu-item-card .price-options .price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0;
+    display: block;
+}
+
+[data-theme="dark"] .menu-item-card .price-options .price {
+    color: var(--primary-color);
+    text-shadow: 0 1px 3px rgba(212, 165, 116, 0.3);
+}
+
 .menu-item-card.hidden {
     display: none;
 }
