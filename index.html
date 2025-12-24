@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,13 +24,13 @@
                     <li class="mobile-theme-toggle">
                         <button class="theme-toggle mobile" id="themeToggleMobile" aria-label="Toggle theme">
                             <i class="fas fa-moon" id="themeIconMobile"></i>
-                            <span>Toggle Theme</span>
+                            <span>Theme</span>
                         </button>
                     </li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <i class="fas fa-moon" id="themeIcon"></i>
+                    <button class="theme-toggle desktop-theme-toggle" id="themeToggleDesktop" aria-label="Toggle theme">
+                        <i class="fas fa-moon" id="themeIconDesktop"></i>
                     </button>
                     <button class="btn-secondary">Order</button>
                     <button class="btn-primary">Reserve Table</button>
@@ -105,36 +105,36 @@
                         <img src="Gillys Cafe_smashed avo.jpg" alt="Smashed Avo">
                     </div>
                     <h3>Smashed Avo</h3>
-                    <p>Poached eggs, avocado, za'atar fetta, chilli flakes, seed mix, balsamic glaze on rye sourdough</p>
-                    <span class="price">$24.00</span>
+                    <p>Smashed fresh avo, soft poached egg, feta cheese, cherry tomatoes, seeds</p>
+                    <span class="price">$14.90</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-image">
                         <img src="Gillys Cafe_big breakfast.jpg" alt="Big Breakfast">
                     </div>
                     <h3>Big Breakfast</h3>
-                    <p>Hearty breakfast platter with eggs, bacon, sausages, hash browns, mushrooms, tomatoes, and toast</p>
-                    <span class="price">$28.00</span>
+                    <p>Eggs, baked beans, bacon, chorizo, hash browns, spinach, grilled tomatoes, sourdough</p>
+                    <span class="price">$26.90</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-image">
                         <img src="Gillys Cafe_chicken schnitzel.jpg" alt="Chicken Schnitzel">
                     </div>
                     <h3>Chicken Schnitzel</h3>
-                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
-                    <span class="price">$26.00</span>
+                    <p>Panko crumbed chicken breast schnitzel served with sea salt fries, house slaw and lemon wedge</p>
+                    <span class="price">$19.00</span>
                 </div>
                 <div class="menu-item">
                     <div class="menu-image">
-                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Belgian Waffle">
+                        <img src="Gillys Cafe_classic cheese burger.jpg" alt="Classic Cheese Burger">
                     </div>
-                    <h3>Belgian Waffle</h3>
-                    <p>Golden Belgian waffle topped with fresh berries, maple syrup, and whipped cream</p>
-                    <span class="price">$18.00</span>
+                    <h3>Classic Cheese Burger</h3>
+                    <p>Wagyu beef, American Cheese, tomato, grilled onion, pickles, lettuce, burger mayo</p>
+                    <span class="price">$22.90</span>
                 </div>
             </div>
             <div class="text-center">
-                <button class="btn-outline">View Full Menu</button>
+                <button class="btn-outline" id="viewFullMenuBtn">View Full Menu</button>
             </div>
         </div>
     </section>
@@ -146,207 +146,578 @@
                 <h2>Our Menu</h2>
                 <p>Discover the flavours of Gilly's Cafe, where every dish is crafted with fresh ingredients and served with care.</p>
             </div>
-            <div class="menu-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="breakfast">Breakfast</button>
-                <button class="filter-btn" data-filter="lunch">Lunch</button>
-                <button class="filter-btn" data-filter="dinner">Dinner</button>
-                <button class="filter-btn" data-filter="desserts">Desserts</button>
-                <button class="filter-btn" data-filter="drinks">Drinks</button>
-                <button class="filter-btn" data-filter="coffee">Coffee</button>
+            <!-- Menu Navigation Tabs -->
+            <div class="menu-nav-tabs">
+                <button class="menu-nav-btn active" data-menu-section="breakfast">Breakfast</button>
+                <button class="menu-nav-btn" data-menu-section="lunch">Lunch & Mains</button>
+                <button class="menu-nav-btn" data-menu-section="small-plates">Small Plates</button>
+                <button class="menu-nav-btn" data-menu-section="coffee">Coffee & Hot Drinks</button>
+                <button class="menu-nav-btn" data-menu-section="drinks">Cold Beverages</button>
+                <button class="menu-nav-btn" data-menu-section="desserts">Desserts</button>
             </div>
             <div class="menu-items-container">
-                <div class="menu-item-card" data-category="breakfast">
+                <!-- BREAKFAST SECTION -->
+                <div class="menu-section-content active" id="breakfast-section">
+                    <div class="menu-section-header">
+                        <h2>Breakfast</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_smashed avo.jpg" alt="Smashed Avo">
                     </div>
                     <h3>Smashed Avo</h3>
-                    <p>Poached eggs, avocado, za'atar fetta, chilli flakes, seed mix, balsamic glaze on rye sourdough</p>
-                    <span class="price">$24.00</span>
+                    <p>Smashed fresh avo, soft poached egg, feta cheese, cherry tomatoes, seeds</p>
+                    <span class="price">$14.90</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image">
+                        <img src="Gillys Cafe_smashed avo.jpg" alt="Loaded Smashed Avo">
+                    </div>
+                    <h3>Loaded Smashed Avo</h3>
+                    <p>Smashed avo on toast, feta, two soft poached eggs, haloumi, grilled mushrooms, cherry tomatoes, mixed seeds</p>
+                    <span class="price">$22.90</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image">
+                        <img src="Gillys Cafe_simon benny.jpg" alt="Eggs Benedict">
+                    </div>
+                    <h3>Eggs Benedict</h3>
+                    <p>Two poached eggs, spinach, hollandaise, sourdough (Mushroom / Bacon / Ham / Salmon Benny)</p>
+                    <span class="price">$21.90</span>
                 </div>
                 <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_big breakfast.jpg" alt="Big Breakfast">
                     </div>
                     <h3>Big Breakfast</h3>
-                    <p>Hearty breakfast platter with eggs, bacon, sausages, hash browns, mushrooms, tomatoes, and toast</p>
-                    <span class="price">$28.00</span>
+                    <p>Eggs, baked beans, bacon, chorizo, hash browns, spinach, grilled tomatoes, sourdough</p>
+                    <span class="price">$26.90</span>
                 </div>
                 <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_veg big breakfast.jpg" alt="Veg Big Breakfast">
+                        <img src="Gillys Cafe_veg big breakfast.jpg" alt="Vegetarian Big Breakfast">
                     </div>
-                    <h3>Veg Big Breakfast</h3>
-                    <p>Vegetarian breakfast platter with eggs, hash browns, mushrooms, tomatoes, baked beans, and toast</p>
-                    <span class="price">$26.00</span>
+                    <h3>Vegetarian Big Breakfast</h3>
+                    <p>Eggs, baked beans, haloumi, mushrooms, spinach, tomatoes, sourdough, hash brown</p>
+                    <span class="price">$26.90</span>
                 </div>
                 <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_simon benny.jpg" alt="Salmon Benny">
+                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Pancake">
                     </div>
-                    <h3>Simon Benny</h3>
-                    <p>Classic eggs benedict with perfectly poached eggs, hollandaise sauce, and your choice of ham or salmon</p>
-                    <span class="price">$22.00</span>
+                    <h3>Pancake</h3>
+                    <p>Three pancakes, fruits, mascarpone, maple syrup, biscuit crumbs, vanilla ice cream</p>
+                    <span class="price">$18.50</span>
                 </div>
                 <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Belgian Waffle">
+                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Breakfast Waffles">
                     </div>
-                    <h3>Belgian Waffle</h3>
-                    <p>Golden Belgian waffle topped with fresh berries, maple syrup, and whipped cream</p>
-                    <span class="price">$18.00</span>
+                    <h3>Breakfast Waffles</h3>
+                    <p>Toasted waffles with berry compote and maple syrup</p>
+                    <span class="price">$15.90</span>
                 </div>
                 <div class="menu-item-card" data-category="breakfast">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_protein yogurt bowl.jpg" alt="Protein Yogurt Bowl">
+                        <img src="Gillys Cafe_protein yogurt bowl.jpg" alt="Protein Granola Bowl">
                     </div>
-                    <h3>Protein Yogurt Bowl</h3>
-                    <p>Greek yogurt with fresh fruits, granola, nuts, and honey - a healthy start to your day</p>
-                    <span class="price">$16.00</span>
+                    <h3>Protein Granola Bowl</h3>
+                    <p>Greek yogurt, granola, berries, chia seeds, honey</p>
+                    <span class="price">$14.50</span>
                 </div>
-                <div class="menu-item-card" data-category="lunch">
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-egg"></i>
+                    </div>
+                    <h3>Eggs Your Way</h3>
+                    <p>Two free range eggs fried, poached or scrambled, sourdough toast</p>
+                    <span class="price">$13.50</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-bacon"></i>
+                    </div>
+                    <h3>Brekkie Wrap</h3>
+                    <p>Egg, bacon, spinach, bbq or tomato sauce</p>
+                    <span class="price">$13.90</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <h3>B.L.A.T Sandwich</h3>
+                    <p>Bacon, lettuce, avocado, tomato on sourdough</p>
+                    <span class="price">$15.90</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Bacon & Egg Burger</h3>
+                    <p>Free range fried egg, bacon, bbq or tomato sauce</p>
+                    <span class="price">$11.90</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Ham, Cheese & Tomato Toastie</h3>
+                    <p>Sliced ham, tasty cheese and tomato on white toast</p>
+                    <span class="price">$9.50</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LUNCH & MAINS SECTION -->
+                <div class="menu-section-content" id="lunch-section">
+                    <div class="menu-section-header">
+                        <h2>Lunch & Mains</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="lunch">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_classic cheese burger.jpg" alt="Classic Cheese Burger">
                     </div>
                     <h3>Classic Cheese Burger</h3>
-                    <p>Juicy beef patty with melted cheese, lettuce, tomato, pickles, and special sauce on a brioche bun</p>
-                    <span class="price">$22.00</span>
+                    <p>Wagyu beef, American Cheese, tomato, grilled onion, pickles, lettuce, burger mayo</p>
+                    <span class="price">$22.90</span>
                 </div>
                 <div class="menu-item-card" data-category="lunch">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_pork sandwich.jpg" alt="Pork Sandwich">
                     </div>
                     <h3>Pork Sandwich</h3>
-                    <p>Tender pulled pork with coleslaw, pickles, and BBQ sauce on a soft roll</p>
-                    <span class="price">$20.00</span>
+                    <p>Pulled pork, swiss cheese, pickles, smokey chipotle, Havana bbq sauce, Cuban roll, served w/fries</p>
+                    <span class="price">$19.50</span>
                 </div>
                 <div class="menu-item-card" data-category="lunch">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_chicken schnitzel.jpg" alt="Chicken Schnitzel">
                     </div>
                     <h3>Chicken Schnitzel</h3>
-                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
-                    <span class="price">$26.00</span>
+                    <p>Panko crumbed chicken breast schnitzel served with sea salt fries, house slaw and lemon wedge</p>
+                    <span class="price">$19.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image">
+                        <img src="Gillys Cafe_chicken schnitzel.jpg" alt="Chicken Parmigiana">
+                    </div>
+                    <h3>Chicken Parmigiana</h3>
+                    <p>Crisp chicken breast schnitzel with bacon and Nacho sauce, topped with cheese served with sea salt fries, house slaw and lemon wedge</p>
+                    <span class="price">$22.50</span>
                 </div>
                 <div class="menu-item-card" data-category="lunch">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_tropical prawn salad.jpg" alt="Tropical Prawn Salad">
                     </div>
                     <h3>Tropical Prawn Salad</h3>
-                    <p>Fresh prawns with mixed greens, tropical fruits, avocado, and citrus dressing</p>
-                    <span class="price">$28.00</span>
+                    <p>Grilled prawns, avocado, orange, Spanish onion, mixed leaf salad with a lemon, herb & green dressing</p>
+                    <span class="price">$25.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Fish & Chips</h3>
+                    <p>Light and crispy, tempura battered fish fillets served with mixed leaf salad, fries, Aioli sauce and lemon wedge</p>
+                    <span class="price">$19.90</span>
                 </div>
                 <div class="menu-item-card" data-category="lunch">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_fried chicken taco.jpg" alt="Fried Chicken Taco">
+                        <img src="Gillys Cafe_fried chicken taco.jpg" alt="Tacos">
                     </div>
-                    <h3>Fried Chicken Taco</h3>
-                    <p>Crispy fried chicken in soft tortillas with slaw, salsa, and chipotle mayo</p>
+                    <h3>Tacos (2 pcs)</h3>
+                    <p>Beef / Chicken / Veggie with capsicum salsa, & creamy chipotle slaw in a soft tortilla</p>
+                    <span class="price">$19.50</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image">
+                        <img src="Gillys Cafe_beef ncachoes.jpg" alt="Nachos">
+                    </div>
+                    <h3>Nachos</h3>
+                    <p>Crispy tortilla chips, guacamole, cheese, salsa, sour cream</p>
+                    <span class="price">$15.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <h3>Chicken Cubano Meal</h3>
+                    <p>Grilled chicken, bacon, swiss cheese, pickles, smokey chipotle and Havana bbq sauce, cuban roll, served w/fries</p>
+                    <span class="price">$16.50</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Beef Sandwich</h3>
+                    <p>Pulled beef, swiss cheese, pickles, smokey chipotle and Havana bbq sauce, cuban roll, served w/fries</p>
+                    <span class="price">$19.50</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <h3>Chicken Wrap</h3>
+                    <p>Grilled chicken breast, smashed avo, tomato salsa, mix leaf salad & peri-peri sauce, toasted, served w/ fries</p>
                     <span class="price">$18.00</span>
                 </div>
                 <div class="menu-item-card" data-category="lunch">
-                    <div class="menu-item-image">
-                        <img src="Gillys Cafe_beef ncachoes.jpg" alt="Beef Nachos">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-hamburger"></i>
                     </div>
-                    <h3>Beef Nachos</h3>
-                    <p>Loaded nachos with seasoned beef, cheese, jalapeños, sour cream, and guacamole</p>
-                    <span class="price">$24.00</span>
+                    <h3>Southern Style Fried Chicken Burger</h3>
+                    <p>Southern fried chicken, slaw, Peri peri sauce, served w/ fries</p>
+                    <span class="price">$19.50</span>
                 </div>
-                <div class="menu-item-card" data-category="dinner">
-                    <div class="menu-item-image">
-                        <img src="Gillys Cafe_chicken schnitzel.jpg" alt="Chicken Schnitzel">
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-hamburger"></i>
                     </div>
-                    <h3>Chicken Schnitzel</h3>
-                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
-                    <span class="price">$26.00</span>
+                    <h3>Chicken & Bacon Burger</h3>
+                    <p>Chicken breast, bacon, tomato, cos lettuce, aioli, served w/ fries</p>
+                    <span class="price">$19.50</span>
                 </div>
-                <div class="menu-item-card" data-category="dinner">
-                    <div class="menu-item-image">
-                        <img src="Gillys Cafe_tropical prawn salad.jpg" alt="Tropical Prawn Salad">
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-hamburger"></i>
                     </div>
-                    <h3>Tropical Prawn Salad</h3>
-                    <p>Fresh prawns with mixed greens, tropical fruits, avocado, and citrus dressing</p>
-                    <span class="price">$28.00</span>
+                    <h3>Grilled Chicken Burger</h3>
+                    <p>Chicken breast, tomato, lettuce, aioli, served w/fries</p>
+                    <span class="price">$19.50</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Haloumi & Pumpkin Salad</h3>
+                    <p>Cos lettuce, baby spinach, cherry tomatoes, toasted pepitas, cranberries, dukkah house dressing, balsamic glaze</p>
+                    <span class="price">$22.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Chicken and Avocado Salad</h3>
+                    <p>Mix leaf, chicken, avocado, feta, tomato onion and lemon dressing</p>
+                    <span class="price">$22.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SMALL PLATES SECTION -->
+                <div class="menu-section-content" id="small-plates-section">
+                    <div class="menu-section-header">
+                        <h2>Small Plates</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Mozzarella Cheese Sticks</h3>
+                    <p>Golden crumbed mozzarella cheese sticks with peri-peri</p>
+                    <span class="price">$13.90</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <h3>Halloumi Cheese Fries</h3>
+                    <p>Haloumi fries w/yoghurt dipping</p>
+                    <span class="price">$13.90</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image">
+                        <img src="Gillys Cafe_beef ncachoes.jpg" alt="Nacho Beef Loaded Fries">
+                    </div>
+                    <h3>Nacho Beef Loaded Fries</h3>
+                    <p>Beef & cheese on fries, smokey chipotle</p>
+                    <span class="price">$16.90</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <h3>Southern Fried Chicken Pieces (4 pcs)</h3>
+                    <p>Southern style fried chicken tenders served w/ Peri peri sauce</p>
+                    <span class="price">$12.90</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- COFFEE & HOT DRINKS SECTION -->
+                <div class="menu-section-content" id="coffee-section">
+                    <div class="menu-section-header">
+                        <h2>Coffee & Hot Drinks</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Short Black</h3>
+                    <p>Rich espresso shot</p>
+                    <span class="price">$4.50</span>
                 </div>
                 <div class="menu-item-card" data-category="coffee">
                     <div class="menu-item-image coffee-image">
                         <i class="fas fa-coffee"></i>
                     </div>
-                    <h3>Morning Roast</h3>
-                    <p>Dark chocolate, dark berry, sweet after notes</p>
-                    <span class="price">$10.00</span>
+                    <h3>Piccolo</h3>
+                    <p>Single shot espresso with steamed milk</p>
+                    <span class="price">$4.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Macchiato</h3>
+                    <p>Espresso with a dollop of steamed milk</p>
+                    <span class="price">$4.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Latte</h3>
+                    <p>Espresso with steamed milk</p>
+                    <span class="price">$5.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Flat White</h3>
+                    <p>Double shot espresso with microfoam</p>
+                    <span class="price">$5.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Cappuccino</h3>
+                    <p>Espresso with steamed milk and foam</p>
+                    <span class="price">$5.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Long Black</h3>
+                    <p>Double shot espresso with hot water</p>
+                    <span class="price">$5.50</span>
                 </div>
                 <div class="menu-item-card" data-category="coffee">
                     <div class="menu-item-image coffee-image">
                         <i class="fas fa-mug-hot"></i>
                     </div>
-                    <h3>Spice Chai Latte Powder</h3>
-                    <p>A mix of star anise, cinnamon, clove, ginger, cardamom, fennel and black tea</p>
-                    <span class="price">$10.00</span>
+                    <h3>Chai Latte</h3>
+                    <p>Spiced tea with steamed milk</p>
+                    <span class="price">$6.00</span>
                 </div>
                 <div class="menu-item-card" data-category="coffee">
                     <div class="menu-item-image coffee-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Matcha Latte</h3>
+                    <p>Japanese green tea powder with steamed milk</p>
+                    <span class="price">$6.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Hot Chocolate</h3>
+                    <p>Rich chocolate drink with steamed milk</p>
+                    <span class="price">$6.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Mocha</h3>
+                    <p>Hot chocolate + Espresso</p>
+                    <span class="price">$6.50</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Organic Tea</h3>
+                    <p>English Breakfast / Earl Grey / Green / Peppermint / Chamomile</p>
+                    <span class="price">$5.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- COLD BEVERAGES SECTION -->
+                <div class="menu-section-content" id="drinks-section">
+                    <div class="menu-section-header">
+                        <h2>Cold Beverages</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Peach & Mango Iced Tea</h3>
+                    <p>Peach iced tea, diced mango, mango syrup, mint leaves</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Mixed Berry Iced Tea</h3>
+                    <p>Lemon iced tea, mixed berries, strawberry syrup, mint leaves</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
                         <i class="fas fa-coffee"></i>
                     </div>
-                    <h3>Sticky Chai Blend</h3>
-                    <p>Full-bodied with a beautiful balance of smooth and spicy</p>
-                    <span class="price">$10.00</span>
+                    <h3>Iced Mocha</h3>
+                    <p>Espresso and milk chocolate blended with ice cream and ice, topped with whipped cream</p>
+                    <span class="price">$9.50</span>
                 </div>
                 <div class="menu-item-card" data-category="drinks">
                     <div class="menu-item-image drink-image">
-                        <i class="fas fa-cocktail"></i>
+                        <i class="fas fa-coffee"></i>
                     </div>
-                    <h3>Negroni</h3>
-                    <p>Gin, campari, sweet vermouth garnished with an orange peel infused with citrus</p>
-                    <span class="price">$22.00</span>
+                    <h3>Iced Latte</h3>
+                    <p>Espresso with cold milk over ice</p>
+                    <span class="price">$8.50</span>
                 </div>
                 <div class="menu-item-card" data-category="drinks">
                     <div class="menu-item-image drink-image">
-                        <i class="fas fa-wine-glass-alt"></i>
+                        <i class="fas fa-coffee"></i>
                     </div>
-                    <h3>Espresso Martini</h3>
-                    <p>Vodka, Galliano vanilla liqueur, Kahlua, espresso, sugar syrup</p>
-                    <span class="price">$19.00</span>
+                    <h3>Matcha Iced Latte</h3>
+                    <p>Matcha green tea with cold milk over ice</p>
+                    <span class="price">$9.90</span>
                 </div>
                 <div class="menu-item-card" data-category="drinks">
                     <div class="menu-item-image drink-image">
-                        <i class="fas fa-glass-whiskey"></i>
+                        <i class="fas fa-coffee"></i>
                     </div>
-                    <h3>Mojito</h3>
-                    <p>Rum, mint, lime, simple sugar</p>
-                    <span class="price">$19.00</span>
+                    <h3>Iced Long Black</h3>
+                    <p>Espresso over ice with cold water</p>
+                    <span class="price">$7.50</span>
                 </div>
-                <div class="menu-item-card" data-category="desserts">
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Chocolate Frappé</h3>
+                    <p>Milk, chocolate blended with ice cream and ice, topped with whipped cream</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Mocha Frappé</h3>
+                    <p>Espresso and milk chocolate blended with ice cream and ice, topped with whipped cream</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Iced Coffee with Ice Cream</h3>
+                    <p>Chocolate, strawberry, caramel or vanilla & whipped cream</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Classic Milkshakes</h3>
+                    <p>Chocolate, strawberry, caramel or vanilla & whipped cream</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Fresh Squeezed Juice</h3>
+                    <p>Any combinations of orange, apple, carrot, ginger, mint</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Juice Your Way</h3>
+                    <p>Custom juice combinations</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Mango Banana Smoothie</h3>
+                    <p>Mango, banana, yogurt, honey</p>
+                    <span class="price">$9.50</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <div class="menu-item-image drink-image">
+                        <i class="fas fa-glass-water"></i>
+                    </div>
+                    <h3>Mix Fruit Smoothie</h3>
+                    <p>Mixed fruits blended with yogurt and honey</p>
+                    <span class="price">$9.50</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DESSERTS SECTION -->
+                <div class="menu-section-content" id="desserts-section">
+                    <div class="menu-section-header">
+                        <h2>Desserts</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="menu-section-items">
+                        <div class="menu-item-card" data-category="desserts">
                     <div class="menu-item-image">
                         <img src="Gillys Cafe_choco lava cake.jpg" alt="Choco Lava Cake">
                     </div>
                     <h3>Choco Lava Cake</h3>
-                    <p>Warm chocolate cake with a molten center, served with vanilla ice cream</p>
-                    <span class="price">$14.00</span>
+                    <p>Warm chocolate lava cake with vanilla ice cream</p>
+                    <span class="price">$19.00</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <h3>Apple Pie Bites</h3>
+                    <p>Apple and cinnamon bites (8) served w/vanilla ice cream</p>
+                    <span class="price">$14.90</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <div class="menu-item-image coffee-image">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <h3>Churros & Ice Cream</h3>
+                    <p>Cinnamon churros, w/ice cream & melted chocolate pot</p>
+                    <span class="price">$17.90</span>
                 </div>
                 <div class="menu-item-card" data-category="desserts">
                     <div class="menu-item-image">
-                        <img src="Gillys Cafe_passionfruit slice.jpg" alt="Passionfruit Slice">
+                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Waffle On">
                     </div>
-                    <h3>Passionfruit Slice</h3>
-                    <p>Tangy passionfruit slice with a buttery biscuit base and creamy topping</p>
-                    <span class="price">$8.00</span>
-                </div>
-                <div class="menu-item-card" data-category="desserts">
-                    <div class="menu-item-image">
-                        <img src="Gillys Cafe_pistachio friands.jpg" alt="Pistachio Friands">
+                    <h3>Waffle On</h3>
+                    <p>Waffles served w/strawberry, banana, smashed Oreo cookies, vanilla ice cream, sliced almonds & melted chocolate</p>
+                    <span class="price">$14.50</span>
+                        </div>
                     </div>
-                    <h3>Pistachio Friands</h3>
-                    <p>Delicate almond and pistachio friands, perfect with coffee</p>
-                    <span class="price">$7.00</span>
-                </div>
-                <div class="menu-item-card" data-category="desserts">
-                    <div class="menu-item-image">
-                        <img src="Gillys Cafe_cup cake.jpg" alt="Cupcake">
-                    </div>
-                    <h3>Cupcake</h3>
-                    <p>Freshly baked cupcakes with buttercream frosting in various flavors</p>
-                    <span class="price">$6.00</span>
                 </div>
             </div>
         </div>

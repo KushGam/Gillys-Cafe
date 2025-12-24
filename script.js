@@ -31,30 +31,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Menu Filter Functionality
-const filterButtons = document.querySelectorAll('.filter-btn');
-const menuItems = document.querySelectorAll('.menu-item-card');
+// Menu Navigation Tabs Functionality
+const menuNavButtons = document.querySelectorAll('.menu-nav-btn');
+const menuSections = document.querySelectorAll('.menu-section-content');
 
-filterButtons.forEach(button => {
+menuNavButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
+        menuNavButtons.forEach(btn => btn.classList.remove('active'));
         // Add active class to clicked button
         button.classList.add('active');
         
-        const filterValue = button.getAttribute('data-filter');
+        const sectionId = button.getAttribute('data-menu-section') + '-section';
         
-        menuItems.forEach(item => {
-            if (filterValue === 'all') {
-                item.classList.remove('hidden');
-            } else {
-                if (item.getAttribute('data-category') === filterValue) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            }
+        // Hide all sections
+        menuSections.forEach(section => {
+            section.classList.remove('active');
         });
+        
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            // Smooth scroll to section
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     });
 });
 
@@ -94,8 +95,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// View Full Menu Button Handler
+const viewFullMenuBtn = document.getElementById('viewFullMenuBtn');
+if (viewFullMenuBtn) {
+    viewFullMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const menuSection = document.getElementById('menu');
+        if (menuSection) {
+            // Scroll to menu section smoothly
+            menuSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+            
+            // Add a subtle highlight effect to the menu section
+            menuSection.style.transition = 'box-shadow 0.3s ease';
+            menuSection.style.boxShadow = '0 0 30px rgba(139, 69, 19, 0.3)';
+            setTimeout(() => {
+                menuSection.style.boxShadow = '';
+            }, 2000);
+            
+            // Ensure the first tab (Breakfast) is active and visible
+            setTimeout(() => {
+                const firstTab = document.querySelector('.menu-nav-btn[data-menu-section="breakfast"]');
+                if (firstTab && !firstTab.classList.contains('active')) {
+                    firstTab.click(); // Trigger the click to show breakfast section
+                }
+            }, 300);
+        }
+    });
+}
+
 // Button Click Handlers (for Order and Reservation buttons)
 document.querySelectorAll('.btn-primary, .btn-outline').forEach(button => {
+    // Skip the View Full Menu button as it has its own handler
+    if (button.id === 'viewFullMenuBtn') return;
+    
     button.addEventListener('click', function(e) {
         const buttonText = this.textContent.trim();
         
@@ -473,8 +508,8 @@ if (chatbotInput) {
 }
 
 // Theme Toggle Functionality
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
+const themeToggleDesktop = document.getElementById('themeToggleDesktop');
+const themeIconDesktop = document.getElementById('themeIconDesktop');
 const themeToggleMobile = document.getElementById('themeToggleMobile');
 const themeIconMobile = document.getElementById('themeIconMobile');
 const html = document.documentElement;
@@ -482,18 +517,18 @@ const html = document.documentElement;
 // Function to update theme icons
 function updateThemeIcons(theme) {
     if (theme === 'dark') {
-        if (themeIcon) {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
+        if (themeIconDesktop) {
+            themeIconDesktop.classList.remove('fa-moon');
+            themeIconDesktop.classList.add('fa-sun');
         }
         if (themeIconMobile) {
             themeIconMobile.classList.remove('fa-moon');
             themeIconMobile.classList.add('fa-sun');
         }
     } else {
-        if (themeIcon) {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
+        if (themeIconDesktop) {
+            themeIconDesktop.classList.remove('fa-sun');
+            themeIconDesktop.classList.add('fa-moon');
         }
         if (themeIconMobile) {
             themeIconMobile.classList.remove('fa-sun');
@@ -514,7 +549,7 @@ function toggleTheme() {
     // Update icons
     updateThemeIcons(newTheme);
     
-    // Close mobile menu after theme change
+    // Close mobile menu after theme change on mobile
     if (window.innerWidth <= 768) {
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -527,16 +562,16 @@ function toggleTheme() {
     }
 }
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', currentTheme);
 
 // Update icons based on current theme
 updateThemeIcons(currentTheme);
 
 // Theme toggle event listeners
-if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
+if (themeToggleDesktop) {
+    themeToggleDesktop.addEventListener('click', toggleTheme);
 }
 
 if (themeToggleMobile) {
