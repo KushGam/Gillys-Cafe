@@ -834,6 +834,51 @@ section {
     box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
 }
 
+/* Kids Menu Button - Special Styling */
+.menu-nav-btn-kids {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFB347 100%);
+    border-color: transparent;
+    color: white !important;
+    position: relative;
+    animation: bounce 2s infinite;
+}
+
+.menu-nav-btn-kids:hover {
+    background: linear-gradient(135deg, #FF8FB3 0%, #FFC470 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+.menu-nav-btn-kids.active {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFB347 100%);
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+[data-theme="dark"] .menu-nav-btn-kids {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFB347 100%);
+    color: white !important;
+}
+
+[data-theme="dark"] .menu-nav-btn-kids:hover {
+    background: linear-gradient(135deg, #FF8FB3 0%, #FFC470 100%);
+}
+
+[data-theme="dark"] .menu-nav-btn-kids.active {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFB347 100%);
+    color: white !important;
+}
+
 .menu-items-container {
     margin-top: 0;
 }
@@ -1071,6 +1116,266 @@ section {
 
 .menu-item-card.hidden {
     display: none;
+}
+
+/* Kids Menu Special Styling */
+.kids-menu-section {
+    background: linear-gradient(135deg, rgba(255, 245, 238, 0.3) 0%, rgba(255, 228, 196, 0.3) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+[data-theme="dark"] .kids-menu-section {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(255, 179, 71, 0.1) 100%);
+}
+
+.kids-menu-header h2 {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFB347 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3rem;
+    animation: rainbow 3s ease infinite;
+}
+
+@keyframes rainbow {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(20deg);
+    }
+}
+
+.kids-category-header {
+    margin: 3rem 0 1.5rem;
+    text-align: center;
+}
+
+.kids-category-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: #FF6B9D;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem;
+}
+
+.kids-category-header h3::before,
+.kids-category-header h3::after {
+    content: '⭐';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    animation: twinkle 1.5s ease-in-out infinite;
+}
+
+.kids-category-header h3::before {
+    left: 0;
+}
+
+.kids-category-header h3::after {
+    right: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(-50%) scale(1.2);
+    }
+}
+
+[data-theme="dark"] .kids-category-header h3 {
+    color: #FFB347;
+}
+
+.kids-menu-card {
+    border: 3px solid #FF6B9D;
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.kids-menu-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.kids-menu-card:hover::before {
+    animation: shine 0.5s ease;
+    opacity: 1;
+}
+
+@keyframes shine {
+    0% {
+        left: -50%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+
+.kids-menu-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #FFB347;
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+}
+
+.kids-menu-card h3 {
+    color: #FF6B9D;
+    font-weight: 700;
+}
+
+.kids-menu-card .price {
+    color: #FF6B9D;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+[data-theme="dark"] .kids-menu-card {
+    border-color: #FFB347;
+    box-shadow: 0 6px 20px rgba(255, 179, 71, 0.3);
+}
+
+[data-theme="dark"] .kids-menu-card:hover {
+    border-color: #FF6B9D;
+    box-shadow: 0 10px 30px rgba(255, 179, 71, 0.5);
+}
+
+[data-theme="dark"] .kids-menu-card h3 {
+    color: #FFB347;
+}
+
+[data-theme="dark"] .kids-menu-card .price {
+    color: #FFB347;
+}
+
+/* Allergy Disclaimer */
+.allergy-disclaimer {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: rgba(139, 69, 19, 0.05);
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-color);
+    text-align: center;
+}
+
+[data-theme="dark"] .allergy-disclaimer {
+    background: rgba(212, 165, 116, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+.disclaimer-text {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+[data-theme="dark"] .disclaimer-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.disclaimer-text strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.dietary-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.dietary-legend span {
+    padding: 0.5rem 1rem;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+}
+
+[data-theme="dark"] .dietary-legend span {
+    background: rgba(212, 165, 116, 0.15);
+    border-color: rgba(212, 165, 116, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dietary-legend strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .dietary-legend strong {
+    color: var(--primary-color);
+}
+
+/* Footer Allergy Note */
+.footer-allergy-note {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.footer-allergy-note p {
+    color: var(--white);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+[data-theme="dark"] .footer-allergy-note {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .footer-allergy-note p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-allergy-note strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.dietary-legend-footer {
+    font-size: 0.8rem;
+    color: #ccc;
+    line-height: 1.8;
+}
+
+[data-theme="dark"] .dietary-legend-footer {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.dietary-legend-footer span {
+    margin: 0 0.25rem;
+}
+
+.dietary-legend-footer strong {
+    color: var(--secondary-color);
+    font-weight: 600;
 }
 
 /* Testimonials Section */
