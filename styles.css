@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Light Theme (Default) */
 :root {
     --primary-color: #8B4513;
     --secondary-color: #D4A574;
@@ -13,16 +14,40 @@
     --text-light: #666;
     --white: #FFFFFF;
     --bg-light: #FAFAFA;
+    --bg-main: #FFFFFF;
     --border-color: #E5E5E5;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
+    --gradient-primary: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(139, 69, 19, 0.7), rgba(212, 165, 116, 0.7));
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #D4A574;
+    --secondary-color: #F5E6D3;
+    --accent-color: #3A2E1F;
+    --text-dark: #F5F5F5;
+    --text-light: #B8B8B8;
+    --white: #1A1A1A;
+    --bg-light: #2A2A2A;
+    --bg-main: #1F1F1F;
+    --border-color: #3A3A3A;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+    --gradient-primary: linear-gradient(135deg, #D4A574 0%, #F5E6D3 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(58, 46, 31, 0.9));
 }
 
 body {
     font-family: var(--font-body);
     color: var(--text-dark);
+    background-color: var(--bg-main);
     line-height: 1.6;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -34,11 +59,13 @@ body {
 /* Navigation */
 .navbar {
     background: var(--white);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px var(--shadow);
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-wrapper {
@@ -75,6 +102,28 @@ body {
 .nav-actions {
     display: flex;
     gap: 1rem;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: rotate(20deg) scale(1.1);
 }
 
 .hamburger {
@@ -93,21 +142,22 @@ body {
 
 /* Buttons */
 .btn-primary {
-    background: var(--primary-color);
+    background: var(--gradient-primary);
     color: var(--white);
     border: none;
     padding: 12px 24px;
-    border-radius: 5px;
+    border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     font-size: 0.95rem;
+    box-shadow: 0 4px 15px var(--shadow);
 }
 
 .btn-primary:hover {
-    background: #6B3410;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+    filter: brightness(1.1);
 }
 
 .btn-secondary {
@@ -146,10 +196,10 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(139, 69, 19, 0.7), rgba(212, 165, 116, 0.7)),
-                url('Gillys Cafe_hero_01.jpg');
+    background: var(--gradient-hero), url('Gillys Cafe_hero_01.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     min-height: 600px;
     display: flex;
     align-items: center;
@@ -157,6 +207,25 @@ body {
     text-align: center;
     color: var(--white);
     padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-hero);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
 }
 
 .hero-content h1 {
@@ -185,6 +254,7 @@ body {
 /* Section Styles */
 section {
     padding: 5rem 0;
+    transition: background-color 0.3s ease;
 }
 
 .section-header {
@@ -216,6 +286,7 @@ section {
 /* About Section */
 .about {
     background: var(--bg-light);
+    transition: background-color 0.3s ease;
 }
 
 .about-content {
@@ -234,6 +305,7 @@ section {
 /* Locations Section */
 .locations {
     background: var(--white);
+    transition: background-color 0.3s ease;
 }
 
 .locations-grid {
@@ -246,14 +318,16 @@ section {
 .location-card {
     background: var(--bg-light);
     padding: 2.5rem;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .location-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
 }
 
 .location-card h3 {
@@ -282,6 +356,7 @@ section {
 /* Best Sellers Section */
 .best-sellers {
     background: var(--bg-light);
+    transition: background-color 0.3s ease;
 }
 
 .menu-grid {
@@ -293,14 +368,16 @@ section {
 
 .menu-item {
     background: var(--white);
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .menu-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
 }
 
 .menu-image {
@@ -358,6 +435,7 @@ section {
 /* Menu Section */
 .menu-section {
     background: var(--white);
+    transition: background-color 0.3s ease;
 }
 
 .menu-filters {
@@ -395,17 +473,20 @@ section {
 .menu-item-card {
     background: var(--bg-light);
     padding: 0;
-    border-radius: 10px;
+    border-radius: 20px;
     border-left: 4px solid var(--primary-color);
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 15px var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .menu-item-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateX(8px) translateY(-4px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
+    border-left-color: var(--secondary-color);
 }
 
 .menu-item-image {
@@ -413,6 +494,9 @@ section {
     height: 200px;
     overflow: hidden;
     background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-item-image img {
@@ -424,6 +508,38 @@ section {
 
 .menu-item-card:hover .menu-item-image img {
     transform: scale(1.05);
+}
+
+.coffee-image {
+    background: linear-gradient(135deg, #6F4E37 0%, #8B4513 100%);
+    color: var(--white);
+}
+
+.coffee-image i {
+    font-size: 4rem;
+    opacity: 0.8;
+    transition: all 0.3s;
+}
+
+.menu-item-card:hover .coffee-image i {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.drink-image {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: var(--white);
+}
+
+.drink-image i {
+    font-size: 4rem;
+    opacity: 0.8;
+    transition: all 0.3s;
+}
+
+.menu-item-card:hover .drink-image i {
+    transform: scale(1.1);
+    opacity: 1;
 }
 
 .menu-item-card h3 {
@@ -455,6 +571,7 @@ section {
 /* Testimonials Section */
 .testimonials {
     background: var(--bg-light);
+    transition: background-color 0.3s ease;
 }
 
 .testimonials-grid {
@@ -467,8 +584,15 @@ section {
 .testimonial-card {
     background: var(--white);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
 }
 
 .stars {
@@ -492,6 +616,7 @@ section {
 /* Reservation Section */
 .reservation {
     background: var(--bg-light);
+    transition: background-color 0.3s ease;
 }
 
 .reservation-content {
@@ -504,14 +629,16 @@ section {
 .reservation-card {
     background: var(--white);
     padding: 3rem;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .reservation-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
 }
 
 .reservation-icon {
@@ -565,6 +692,7 @@ section {
 /* Contact Section */
 .contact {
     background: var(--white);
+    transition: background-color 0.3s ease;
 }
 
 .contact-grid {
@@ -577,8 +705,15 @@ section {
 .contact-card {
     background: var(--bg-light);
     padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px var(--shadow-hover);
 }
 
 .contact-card h3 {
@@ -689,6 +824,12 @@ section {
     background: var(--text-dark);
     color: var(--white);
     padding: 3rem 0 1rem;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .footer {
+    background: #0F0F0F;
+    border-top: 1px solid var(--border-color);
 }
 
 .footer-content {
@@ -859,25 +1000,32 @@ section {
 }
 
 .chatbot-close {
-    background: transparent;
-    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: var(--white);
     font-size: 1.3rem;
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
-    transition: background 0.3s;
-    width: 40px;
-    height: 40px;
+    transition: all 0.3s;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
     touch-action: manipulation;
+    z-index: 10;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
 }
 
-.chatbot-close:hover {
-    background: rgba(255, 255, 255, 0.2);
+.chatbot-close:hover,
+.chatbot-close:active {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
 }
 
 .chatbot-messages {
@@ -994,9 +1142,10 @@ section {
         width: 100%;
         text-align: center;
         transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 27px var(--shadow);
         padding: 2rem 0;
         gap: 0;
+        z-index: 999;
     }
 
     .nav-menu.active {
@@ -1018,6 +1167,7 @@ section {
         transition: 0.3s;
         padding: 1rem 0;
         gap: 1rem;
+        z-index: 999;
     }
 
     .nav-actions.active {
@@ -1026,6 +1176,7 @@ section {
 
     .hamburger {
         display: flex;
+        z-index: 1001;
     }
 
     .hamburger.active span:nth-child(1) {
@@ -1055,26 +1206,58 @@ section {
     .menu-grid,
     .menu-items-container {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .locations-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .contact-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .hero-buttons,
     .location-buttons {
         flex-direction: column;
         width: 100%;
+        gap: 1rem;
     }
 
     .btn-primary,
     .btn-outline,
     .btn-secondary {
         width: 100%;
+        min-height: 48px;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Better mobile spacing */
+    .container {
+        padding: 0 20px;
+    }
+
+    section {
+        padding: 3.5rem 0;
+    }
+
+    .menu-filters {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .filter-btn {
+        min-height: 40px;
+        padding: 10px 18px;
     }
 }
 
@@ -1104,18 +1287,38 @@ section {
         right: 0;
         left: 0;
         border-radius: 0;
+        position: fixed;
     }
 
     .chatbot-toggle {
         bottom: 10px;
         right: 10px;
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
         font-size: 1.3rem;
+        min-width: 56px;
+        min-height: 56px;
     }
 
     .chatbot-header {
         padding: 1rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    .chatbot-close {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .chatbot-close:active {
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(0.95);
     }
 
     .chatbot-info h3 {
@@ -1124,6 +1327,76 @@ section {
 
     .chatbot-info p {
         font-size: 0.8rem;
+    }
+
+    .chatbot-messages {
+        padding: 1rem;
+        padding-bottom: 2rem;
+    }
+
+    .chatbot-input-container {
+        padding: 1rem;
+        position: sticky;
+        bottom: 0;
+        background: var(--white);
+        z-index: 5;
+    }
+
+    #chatbotInput {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 0.875rem 1rem;
+    }
+
+    #chatbotSend {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    /* Improve mobile touch targets */
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        min-height: 44px;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Better mobile spacing */
+    .container {
+        padding: 0 15px;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    .menu-item-card,
+    .location-card,
+    .testimonial-card,
+    .contact-card,
+    .reservation-card {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Improve mobile menu grid */
+    .menu-grid,
+    .menu-items-container {
+        gap: 1.5rem;
+    }
+
+    .testimonials-grid,
+    .contact-grid,
+    .reservation-content {
+        gap: 1.5rem;
     }
 }
 
@@ -1136,13 +1409,23 @@ section {
         right: 20px;
         left: 20px;
         max-width: 100%;
+        position: fixed;
     }
 
     .chatbot-toggle {
         bottom: 15px;
         right: 15px;
-        width: 55px;
-        height: 55px;
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        min-height: 56px;
+    }
+
+    .chatbot-close {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .chatbot-messages {
@@ -1151,6 +1434,10 @@ section {
 
     .message-content {
         max-width: 85%;
+    }
+
+    #chatbotInput {
+        font-size: 16px; /* Prevents zoom on iOS */
     }
 }
 

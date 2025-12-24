@@ -159,7 +159,16 @@ if (chatbotToggle) {
 
 // Close chatbot
 if (chatbotClose) {
-    chatbotClose.addEventListener('click', () => {
+    chatbotClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        chatbotContainer.classList.remove('active');
+    });
+    
+    // Also handle touch events for mobile
+    chatbotClose.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         chatbotContainer.classList.remove('active');
     });
 }
@@ -175,6 +184,22 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+// Prevent body scroll when chatbot is open on mobile
+if (chatbotContainer) {
+    const observer = new MutationObserver(() => {
+        if (chatbotContainer.classList.contains('active') && window.innerWidth <= 768) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    observer.observe(chatbotContainer, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+}
 
 // Send message function
 function sendMessage() {
@@ -305,6 +330,45 @@ if (chatbotInput) {
     chatbotInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             sendMessage();
+        }
+    });
+}
+
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', currentTheme);
+
+// Update icon based on current theme
+if (currentTheme === 'dark') {
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+} else {
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+}
+
+// Theme toggle event listener
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        // Set new theme
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update icon
+        if (newTheme === 'dark') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
         }
     });
 }
