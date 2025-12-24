@@ -55,14 +55,18 @@ function renderMenuFromData() {
         const itemsContainer = section.querySelector('.menu-section-items');
         if (!itemsContainer) return;
         
-        // Clear existing items
-        itemsContainer.innerHTML = '';
-        
-        // Render items
-        categories[category].forEach(item => {
-            const card = createMenuItemCard(item);
-            itemsContainer.appendChild(card);
-        });
+        // Only clear and render if we have items for this category
+        if (categories[category].length > 0) {
+            // Clear existing items
+            itemsContainer.innerHTML = '';
+            
+            // Render items
+            categories[category].forEach(item => {
+                const card = createMenuItemCard(item);
+                itemsContainer.appendChild(card);
+            });
+        }
+        // If no items for this category, leave HTML menu items as-is
     });
 }
 
