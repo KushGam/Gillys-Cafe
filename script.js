@@ -157,29 +157,40 @@ if (chatbotToggle) {
     });
 }
 
+// Function to close chatbot and restore body scroll
+function closeChatbot() {
+    if (chatbotContainer) {
+        chatbotContainer.classList.remove('active');
+        // Always restore body scroll
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+    }
+}
+
 // Close chatbot
 if (chatbotClose) {
     chatbotClose.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        chatbotContainer.classList.remove('active');
+        closeChatbot();
     });
     
     // Also handle touch events for mobile
     chatbotClose.addEventListener('touchend', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        chatbotContainer.classList.remove('active');
+        closeChatbot();
     });
 }
 
 // Close chatbot when clicking outside (mobile-friendly)
 document.addEventListener('click', (e) => {
     if (chatbotContainer && chatbotContainer.classList.contains('active')) {
+        // Don't close if clicking inside chatbot or on toggle button
         if (!chatbotContainer.contains(e.target) && !chatbotToggle.contains(e.target)) {
             // Only close on mobile devices
             if (window.innerWidth <= 768) {
-                chatbotContainer.classList.remove('active');
+                closeChatbot();
             }
         }
     }
@@ -190,8 +201,13 @@ if (chatbotContainer) {
     const observer = new MutationObserver(() => {
         if (chatbotContainer.classList.contains('active') && window.innerWidth <= 768) {
             document.body.style.overflow = 'hidden';
+            // Prevent scroll on iOS
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
         } else {
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
         }
     });
     
@@ -200,6 +216,22 @@ if (chatbotContainer) {
         attributeFilter: ['class']
     });
 }
+
+// Also restore scroll on window resize
+window.addEventListener('resize', () => {
+    if (!chatbotContainer || !chatbotContainer.classList.contains('active')) {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+    }
+});
+
+// Close chatbot with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatbotContainer && chatbotContainer.classList.contains('active')) {
+        closeChatbot();
+    }
+});
 
 // Send message function
 function sendMessage() {
