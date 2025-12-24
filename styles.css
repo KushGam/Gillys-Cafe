@@ -2021,7 +2021,7 @@ section {
         font-size: 1.1rem;
     }
 
-    /* Mobile Menu Close Button */
+    /* Mobile Menu Close Button - Show only on mobile */
     .mobile-menu-close {
         display: block;
         margin: 0;
