@@ -167,34 +167,59 @@ function closeChatbot() {
     }
 }
 
-// Close chatbot
+// Close chatbot - multiple event handlers for reliability
 if (chatbotClose) {
+    // Click handler
     chatbotClose.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         closeChatbot();
+        return false;
     });
     
-    // Also handle touch events for mobile
-    chatbotClose.addEventListener('touchend', (e) => {
+    // Touch start - immediate response
+    chatbotClose.addEventListener('touchstart', (e) => {
         e.preventDefault();
         e.stopPropagation();
         closeChatbot();
+        return false;
+    }, { passive: false });
+    
+    // Touch end - backup
+    chatbotClose.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        closeChatbot();
+        return false;
+    }, { passive: false });
+    
+    // Mouse down - for desktop
+    chatbotClose.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChatbot();
+        return false;
     });
 }
 
-// Close chatbot when clicking outside (mobile-friendly)
-document.addEventListener('click', (e) => {
+// Close chatbot when clicking/touching outside (mobile-friendly)
+function handleOutsideClick(e) {
     if (chatbotContainer && chatbotContainer.classList.contains('active')) {
         // Don't close if clicking inside chatbot or on toggle button
         if (!chatbotContainer.contains(e.target) && !chatbotToggle.contains(e.target)) {
-            // Only close on mobile devices
+            // Close on mobile devices
             if (window.innerWidth <= 768) {
+                e.preventDefault();
                 closeChatbot();
             }
         }
     }
-});
+}
+
+document.addEventListener('click', handleOutsideClick, true);
+document.addEventListener('touchend', handleOutsideClick, true);
 
 // Prevent body scroll when chatbot is open on mobile
 if (chatbotContainer) {
@@ -232,6 +257,47 @@ document.addEventListener('keydown', (e) => {
         closeChatbot();
     }
 });
+
+// Add swipe down to close on mobile
+let touchStartY = 0;
+let touchEndY = 0;
+let lastTap = 0;
+
+if (chatbotContainer) {
+    chatbotContainer.addEventListener('touchstart', (e) => {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    
+    chatbotContainer.addEventListener('touchend', (e) => {
+        touchEndY = e.changedTouches[0].screenY;
+        const swipeDistance = touchStartY - touchEndY;
+        // If swiped down more than 100px from the top, close chatbot
+        if (swipeDistance < -100 && touchStartY < 100) {
+            closeChatbot();
+        }
+    }, { passive: true });
+}
+
+// Double tap on header to close (mobile fallback)
+const chatbotHeader = document.querySelector('.chatbot-header');
+if (chatbotHeader) {
+    chatbotHeader.addEventListener('click', (e) => {
+        // Don't trigger if clicking the close button
+        if (e.target.closest('.chatbot-close')) {
+            return;
+        }
+        
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        
+        if (tapLength < 300 && tapLength > 0) {
+            // Double tap detected
+            e.preventDefault();
+            closeChatbot();
+        }
+        lastTap = currentTime;
+    });
+}
 
 // Send message function
 function sendMessage() {
