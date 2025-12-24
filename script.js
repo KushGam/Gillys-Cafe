@@ -8,6 +8,7 @@ function loadMenuItemsData() {
         try {
             menuItemsData = JSON.parse(stored);
             if (menuItemsData.length > 0) {
+                // Only render from localStorage if we have data
                 renderMenuFromData();
                 return true;
             }
@@ -15,7 +16,8 @@ function loadMenuItemsData() {
             console.error('Error parsing menu items:', e);
         }
     }
-    return false; // Use HTML fallback
+    // If no localStorage data, keep HTML menu items as-is (don't clear them)
+    return false; // Use HTML fallback - HTML menu items remain visible
 }
 
 // Render menu from data
@@ -107,7 +109,13 @@ function createMenuItemCard(item) {
 // Initialize menu on page load
 document.addEventListener('DOMContentLoaded', () => {
     // Try to load from localStorage, fallback to HTML
-    loadMenuItemsData();
+    // If localStorage is empty, HTML menu items will remain visible
+    const hasLocalStorageData = loadMenuItemsData();
+    
+    // If no localStorage data, HTML menu is already visible, so we're done
+    if (!hasLocalStorageData) {
+        console.log('No menu data in localStorage, using HTML menu items');
+    }
 });
 
 // Mobile Navigation Toggle
