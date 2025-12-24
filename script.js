@@ -477,7 +477,7 @@ function getBotResponse(message) {
     
     // Greeting responses
     if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-        return `<p>Hello! 👋 Welcome to Gilly's Cafe! How can I help you today?</p>
+        return `<p>Hello! 👋 Welcome to Gillys Breakfast & Lunch! How can I help you today?</p>
                 <p>You can ask me about our menu, opening hours, reservations, location, or anything else!</p>`;
     }
     
