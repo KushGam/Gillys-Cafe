@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gilly's Cafe - Specialty Coffee & Gourmet Dining</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">Gilly's Cafe</div>
+                <ul class="nav-menu">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#locations">Locations</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn-secondary">Order</button>
+                    <button class="btn-primary">Reserve Table</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Gilly's Cafe</h1>
+            <p>Your go-to spot for specialty coffee and a variety of delicious dishes. Serving breakfast, lunch, and dinner with high-quality ingredients and exceptional service in a warm, inviting café atmosphere.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Order Now</button>
+                <button class="btn-outline">Reservation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Welcome to Gilly's Cafe</h2>
+                <h3>Discover Our Story</h3>
+            </div>
+            <div class="about-content">
+                <p>Gilly's Cafe opened its doors with a vision to create exceptional dining experiences. We blend the warmth of a café with the sophistication of a restaurant, offering specialty coffees and a diverse menu of freshly prepared, gourmet dishes for breakfast, lunch, and dinner.</p>
+                <p>At Gilly's Cafe, we focus on high-quality ingredients, family values, and a welcoming atmosphere. We want every guest to feel like part of the family, enjoying gourmet food, exceptional coffee, and heartfelt service rooted in quality, sustainability, and community.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="locations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Location</h2>
+                <p>We invite you into a cozy, welcoming environment where artisanal coffee and fresh, locally sourced ingredients take center stage.</p>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>Kellyville Location</h3>
+                    <div class="hours">
+                        <p><strong>Monday - Sunday:</strong> 6am - 4pm</p>
+                    </div>
+                    <div class="location-buttons">
+                        <button class="btn-primary">Order Now</button>
+                        <button class="btn-outline">Reserve Table</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="best-sellers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Best Sellers</h2>
+                <p>Discover our best sellers—customer favorites crafted with love and quality ingredients, guaranteed to satisfy every craving.</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="Gillys Cafe_smashed avo.jpg" alt="Smashed Avo">
+                    </div>
+                    <h3>Smashed Avo</h3>
+                    <p>Poached eggs, avocado, za'atar fetta, chilli flakes, seed mix, balsamic glaze on rye sourdough</p>
+                    <span class="price">$24.00</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="Gillys Cafe_big breakfast.jpg" alt="Big Breakfast">
+                    </div>
+                    <h3>Big Breakfast</h3>
+                    <p>Hearty breakfast platter with eggs, bacon, sausages, hash browns, mushrooms, tomatoes, and toast</p>
+                    <span class="price">$28.00</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="Gillys Cafe_chicken schnitzel.jpg" alt="Chicken Schnitzel">
+                    </div>
+                    <h3>Chicken Schnitzel</h3>
+                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
+                    <span class="price">$26.00</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="Gillys Cafe_belgian waffle.jpg" alt="Belgian Waffle">
+                    </div>
+                    <h3>Belgian Waffle</h3>
+                    <p>Golden Belgian waffle topped with fresh berries, maple syrup, and whipped cream</p>
+                    <span class="price">$18.00</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn-outline">View Full Menu</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Menu</h2>
+                <p>Discover the flavours of Gilly's Cafe, where every dish is crafted with fresh ingredients and served with care.</p>
+            </div>
+            <div class="menu-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+                <button class="filter-btn" data-filter="lunch">Lunch</button>
+                <button class="filter-btn" data-filter="dinner">Dinner</button>
+                <button class="filter-btn" data-filter="desserts">Desserts</button>
+                <button class="filter-btn" data-filter="drinks">Drinks</button>
+                <button class="filter-btn" data-filter="coffee">Coffee</button>
+            </div>
+            <div class="menu-items-container">
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Smashed Avo</h3>
+                    <p>Poached eggs, avocado, za'atar fetta, chilli flakes, seed mix, balsamic glaze on rye sourdough</p>
+                    <span class="price">$24.00</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Big Breakfast</h3>
+                    <p>Hearty breakfast platter with eggs, bacon, sausages, hash browns, mushrooms, tomatoes, and toast</p>
+                    <span class="price">$28.00</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Veg Big Breakfast</h3>
+                    <p>Vegetarian breakfast platter with eggs, hash browns, mushrooms, tomatoes, baked beans, and toast</p>
+                    <span class="price">$26.00</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Simon Benny</h3>
+                    <p>Classic eggs benedict with perfectly poached eggs, hollandaise sauce, and your choice of ham or salmon</p>
+                    <span class="price">$22.00</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Belgian Waffle</h3>
+                    <p>Golden Belgian waffle topped with fresh berries, maple syrup, and whipped cream</p>
+                    <span class="price">$18.00</span>
+                </div>
+                <div class="menu-item-card" data-category="breakfast">
+                    <h3>Protein Yogurt Bowl</h3>
+                    <p>Greek yogurt with fresh fruits, granola, nuts, and honey - a healthy start to your day</p>
+                    <span class="price">$16.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Classic Cheese Burger</h3>
+                    <p>Juicy beef patty with melted cheese, lettuce, tomato, pickles, and special sauce on a brioche bun</p>
+                    <span class="price">$22.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Pork Sandwich</h3>
+                    <p>Tender pulled pork with coleslaw, pickles, and BBQ sauce on a soft roll</p>
+                    <span class="price">$20.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Chicken Schnitzel</h3>
+                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
+                    <span class="price">$26.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Tropical Prawn Salad</h3>
+                    <p>Fresh prawns with mixed greens, tropical fruits, avocado, and citrus dressing</p>
+                    <span class="price">$28.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Fried Chicken Taco</h3>
+                    <p>Crispy fried chicken in soft tortillas with slaw, salsa, and chipotle mayo</p>
+                    <span class="price">$18.00</span>
+                </div>
+                <div class="menu-item-card" data-category="lunch">
+                    <h3>Beef Nachos</h3>
+                    <p>Loaded nachos with seasoned beef, cheese, jalapeños, sour cream, and guacamole</p>
+                    <span class="price">$24.00</span>
+                </div>
+                <div class="menu-item-card" data-category="dinner">
+                    <h3>Chicken Schnitzel</h3>
+                    <p>Crispy crumbed chicken schnitzel served with chips, salad, and lemon</p>
+                    <span class="price">$26.00</span>
+                </div>
+                <div class="menu-item-card" data-category="dinner">
+                    <h3>Tropical Prawn Salad</h3>
+                    <p>Fresh prawns with mixed greens, tropical fruits, avocado, and citrus dressing</p>
+                    <span class="price">$28.00</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <h3>Morning Roast</h3>
+                    <p>Dark chocolate, dark berry, sweet after notes</p>
+                    <span class="price">$10.00</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <h3>Spice Chai Latte Powder</h3>
+                    <p>A mix of star anise, cinnamon, clove, ginger, cardamom, fennel and black tea</p>
+                    <span class="price">$10.00</span>
+                </div>
+                <div class="menu-item-card" data-category="coffee">
+                    <h3>Sticky Chai Blend</h3>
+                    <p>Full-bodied with a beautiful balance of smooth and spicy</p>
+                    <span class="price">$10.00</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <h3>Negroni</h3>
+                    <p>Gin, campari, sweet vermouth garnished with an orange peel infused with citrus</p>
+                    <span class="price">$22.00</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <h3>Espresso Martini</h3>
+                    <p>Vodka, Galliano vanilla liqueur, Kahlua, espresso, sugar syrup</p>
+                    <span class="price">$19.00</span>
+                </div>
+                <div class="menu-item-card" data-category="drinks">
+                    <h3>Mojito</h3>
+                    <p>Rum, mint, lime, simple sugar</p>
+                    <span class="price">$19.00</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <h3>Choco Lava Cake</h3>
+                    <p>Warm chocolate cake with a molten center, served with vanilla ice cream</p>
+                    <span class="price">$14.00</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <h3>Passionfruit Slice</h3>
+                    <p>Tangy passionfruit slice with a buttery biscuit base and creamy topping</p>
+                    <span class="price">$8.00</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <h3>Pistachio Friands</h3>
+                    <p>Delicate almond and pistachio friands, perfect with coffee</p>
+                    <span class="price">$7.00</span>
+                </div>
+                <div class="menu-item-card" data-category="desserts">
+                    <h3>Cupcake</h3>
+                    <p>Freshly baked cupcakes with buttercream frosting in various flavors</p>
+                    <span class="price">$6.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Customer Feedback</h2>
+                <h3>What Our Guests Say</h3>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"In the lakes region area, this is the best breakfast I have had. There's flavor and unique-ness to the food."</p>
+                    <div class="author">- Local Patron</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Gilly's is always my go-to in Bristol no matter what. The food is ALWAYS great and comes out just as quick as it takes you to browse the menu."</p>
+                    <div class="author">- Regular Customer</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Renowned for its hearty breakfast offerings and welcoming atmosphere. The Gilly's Breakfast Club Sandwich and Corned Beef Hash and Eggs are favorites!"</p>
+                    <div class="author">- Happy Guest</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Patrons frequently commend the flavorful dishes and the friendly service. A cherished spot among locals and visitors alike."</p>
+                    <div class="author">- Community Member</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="reservation">
+        <div class="container">
+            <div class="section-header">
+                <h2>Make a Reservation</h2>
+                <p>Book your table with us! Call or email to make a reservation.</p>
+            </div>
+            <div class="reservation-content">
+                <div class="reservation-card">
+                    <div class="reservation-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p><a href="tel:+61405290710">+61 405 290 710</a></p>
+                    <p class="reservation-note">Call us during opening hours to make a reservation</p>
+                </div>
+                <div class="reservation-card">
+                    <div class="reservation-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p><a href="mailto:gillyscafeco@gmail.com">gillyscafeco@gmail.com</a></p>
+                    <p class="reservation-note">Send us an email and we'll get back to you soon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <p>Have questions or need more info? Get in touch with us, and we'll be happy to assist you.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Gilly's Breakfast & Lunch</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> C6 / Level 1/2 Hector Ct, Kellyville NSW 2155</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+61405290710">+61 405 290 710</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:gillyscafeco@gmail.com">gillyscafeco@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="opening-hours">
+                <h3>Opening Hours</h3>
+                <p>Monday – Sunday: 6am – 4pm</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Gilly's Cafe</h3>
+                    <p>A Mediterranean-inspired friendly place to stop whether you want breakfast, lunch, dinner, cocktails or just a quick break.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#locations">Locations</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Gilly's Cafe. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
