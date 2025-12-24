@@ -475,39 +475,74 @@ if (chatbotInput) {
 // Theme Toggle Functionality
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
+const themeToggleMobile = document.getElementById('themeToggleMobile');
+const themeIconMobile = document.getElementById('themeIconMobile');
 const html = document.documentElement;
+
+// Function to update theme icons
+function updateThemeIcons(theme) {
+    if (theme === 'dark') {
+        if (themeIcon) {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        if (themeIconMobile) {
+            themeIconMobile.classList.remove('fa-moon');
+            themeIconMobile.classList.add('fa-sun');
+        }
+    } else {
+        if (themeIcon) {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+        if (themeIconMobile) {
+            themeIconMobile.classList.remove('fa-sun');
+            themeIconMobile.classList.add('fa-moon');
+        }
+    }
+}
+
+// Function to toggle theme
+function toggleTheme() {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Set new theme
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update icons
+    updateThemeIcons(newTheme);
+    
+    // Close mobile menu after theme change
+    if (window.innerWidth <= 768) {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navActions = document.querySelector('.nav-actions');
+        if (hamburger && navMenu && navActions) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navActions.classList.remove('active');
+        }
+    }
+}
 
 // Check for saved theme preference or default to light mode
 const currentTheme = localStorage.getItem('theme') || 'light';
 html.setAttribute('data-theme', currentTheme);
 
-// Update icon based on current theme
-if (currentTheme === 'dark') {
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
-} else {
-    themeIcon.classList.remove('fa-sun');
-    themeIcon.classList.add('fa-moon');
+// Update icons based on current theme
+updateThemeIcons(currentTheme);
+
+// Theme toggle event listeners
+if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
 }
 
-// Theme toggle event listener
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        // Set new theme
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        
-        // Update icon
-        if (newTheme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        }
+if (themeToggleMobile) {
+    themeToggleMobile.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleTheme();
     });
 }
 
