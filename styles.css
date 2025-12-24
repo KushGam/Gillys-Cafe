@@ -21,7 +21,8 @@
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     --gradient-primary: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(139, 69, 19, 0.7), rgba(212, 165, 116, 0.7));
+    --gradient-hero: linear-gradient(135deg, rgba(139, 69, 19, 0.5), rgba(212, 165, 116, 0.5));
+    --hero-text-color: #FFFFFF;
 }
 
 /* Dark Theme with Glassmorphism */
@@ -38,9 +39,10 @@
     --shadow: rgba(0, 0, 0, 0.4);
     --shadow-hover: rgba(0, 0, 0, 0.6);
     --gradient-primary: linear-gradient(135deg, #D4A574 0%, #F5E6D3 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(26, 26, 26, 0.85), rgba(40, 32, 24, 0.85));
+    --gradient-hero: linear-gradient(135deg, rgba(26, 26, 26, 0.6), rgba(40, 32, 24, 0.6));
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
+    --hero-text-color: #FFFFFF;
 }
 
 body {
@@ -117,24 +119,41 @@ body {
 }
 
 .theme-toggle {
-    background: transparent;
+    background: var(--white);
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    position: relative;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(40, 40, 40, 0.9);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .theme-toggle:hover {
     background: var(--primary-color);
     color: var(--white);
     transform: rotate(20deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(212, 165, 116, 0.5);
 }
 
 .hamburger {
@@ -207,16 +226,17 @@ body {
 
 /* Hero Section */
 .hero {
-    background: var(--gradient-hero), url('Gillys Cafe_hero_01.jpg');
+    background-image: url('Gillys Cafe_hero_01.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--white);
+    color: var(--hero-text-color);
     padding: 4rem 2rem;
     position: relative;
     overflow: hidden;
@@ -231,6 +251,7 @@ body {
     bottom: 0;
     background: var(--gradient-hero);
     z-index: 1;
+    opacity: 0.6;
 }
 
 .hero-content {
@@ -244,6 +265,8 @@ body {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
+    color: var(--hero-text-color);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content p {
@@ -253,6 +276,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.8;
+    color: var(--hero-text-color);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-buttons {
@@ -260,6 +285,14 @@ body {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-buttons .btn-primary,
+.hero-buttons .btn-outline {
+    text-shadow: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Section Styles */
@@ -1503,6 +1536,13 @@ section {
         height: 44px;
         min-width: 44px;
         min-height: 44px;
+        background: var(--white);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .theme-toggle {
+        background: rgba(40, 40, 40, 0.9);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
     }
 
     /* Better mobile spacing */
@@ -1657,6 +1697,13 @@ section {
         height: 44px;
         min-width: 44px;
         min-height: 44px;
+        background: var(--white);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .theme-toggle {
+        background: rgba(40, 40, 40, 0.9);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
     }
 
     /* Better mobile spacing */
