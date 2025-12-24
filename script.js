@@ -250,6 +250,38 @@ if (viewFullMenuBtn) {
     });
 }
 
+// Order Modal Functions
+function openOrderModal() {
+    const orderModal = document.getElementById('orderModal');
+    if (orderModal) {
+        orderModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        // Close mobile menu if open
+        if (navMenu && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navActions.classList.remove('active');
+        }
+    }
+}
+
+function closeOrderModal() {
+    const orderModal = document.getElementById('orderModal');
+    if (orderModal) {
+        orderModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Nav Order Button
+const navOrderBtn = document.getElementById('navOrderBtn');
+if (navOrderBtn) {
+    navOrderBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openOrderModal();
+    });
+}
+
 // Button Click Handlers (for Order and Reservation buttons)
 document.querySelectorAll('.btn-primary, .btn-outline').forEach(button => {
     // Skip the View Full Menu button as it has its own handler
@@ -261,11 +293,7 @@ document.querySelectorAll('.btn-primary, .btn-outline').forEach(button => {
         if (buttonText.includes('Order')) {
             // Show order modal
             e.preventDefault();
-            const orderModal = document.getElementById('orderModal');
-            if (orderModal) {
-                orderModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            openOrderModal();
         } else if (buttonText.includes('Reserve') || buttonText.includes('Reservation')) {
             // Scroll to reservation section
             e.preventDefault();
@@ -275,6 +303,12 @@ document.querySelectorAll('.btn-primary, .btn-outline').forEach(button => {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                // Close mobile menu if open
+                if (navMenu && navMenu.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    navActions.classList.remove('active');
+                }
             }
         }
     });
@@ -716,20 +750,14 @@ const orderModalClose = document.getElementById('orderModalClose');
 
 // Close modal when close button is clicked
 if (orderModalClose) {
-    orderModalClose.addEventListener('click', () => {
-        if (orderModal) {
-            orderModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+    orderModalClose.addEventListener('click', closeOrderModal);
 }
 
 // Close modal when clicking outside
 if (orderModal) {
     orderModal.addEventListener('click', (e) => {
         if (e.target === orderModal) {
-            orderModal.classList.remove('active');
-            document.body.style.overflow = '';
+            closeOrderModal();
         }
     });
 }
@@ -737,9 +765,19 @@ if (orderModal) {
 // Close modal with Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && orderModal && orderModal.classList.contains('active')) {
-        orderModal.classList.remove('active');
-        document.body.style.overflow = '';
+        closeOrderModal();
     }
 });
+
+// Mobile Menu Close Button
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+if (mobileMenuClose && hamburger && navMenu && navActions) {
+    mobileMenuClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        navActions.classList.remove('active');
+    });
+}
 
 

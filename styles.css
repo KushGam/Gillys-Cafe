@@ -2021,6 +2021,63 @@ section {
         font-size: 1.1rem;
     }
 
+    /* Mobile Menu Close Button */
+    .mobile-menu-close {
+        display: block;
+        margin: 0;
+        padding: 0;
+        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    [data-theme="dark"] .mobile-menu-close {
+        border-bottom-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .mobile-close-btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        border-radius: 12px;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        transition: all 0.3s ease;
+        margin: 0 auto;
+        max-width: 200px;
+    }
+
+    .mobile-close-btn i {
+        font-size: 1.2rem;
+    }
+
+    .mobile-close-btn:hover,
+    .mobile-close-btn:active {
+        background: var(--primary-color);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    }
+
+    [data-theme="dark"] .mobile-close-btn {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    [data-theme="dark"] .mobile-close-btn:hover,
+    [data-theme="dark"] .mobile-close-btn:active {
+        background: var(--primary-color);
+        color: var(--white);
+        box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
+    }
+
     /* Hide desktop theme toggle on mobile */
     .desktop-theme-toggle {
         display: none !important;
