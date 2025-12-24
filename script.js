@@ -148,12 +148,28 @@ const chatbotSend = document.getElementById('chatbotSend');
 const chatbotMessages = document.getElementById('chatbotMessages');
 const chatbotBadge = document.querySelector('.chatbot-badge');
 
-// Toggle chatbot
+// Ensure chatbot starts closed
+if (chatbotContainer) {
+    chatbotContainer.classList.remove('active');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+}
+
+// Toggle chatbot - only open when button is clicked
 if (chatbotToggle) {
-    chatbotToggle.addEventListener('click', () => {
-        chatbotContainer.classList.add('active');
-        chatbotBadge.style.display = 'none';
-        chatbotInput.focus();
+    chatbotToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (chatbotContainer) {
+            chatbotContainer.classList.add('active');
+            if (chatbotBadge) {
+                chatbotBadge.style.display = 'none';
+            }
+            if (chatbotInput) {
+                setTimeout(() => chatbotInput.focus(), 100);
+            }
+        }
     });
 }
 
@@ -164,44 +180,68 @@ function closeChatbot() {
         // Always restore body scroll
         document.body.style.overflow = '';
         document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
+        
+        // Force remove active class
+        chatbotContainer.setAttribute('class', chatbotContainer.getAttribute('class').replace('active', '').trim());
+        
+        // Blur input if focused
+        if (chatbotInput && document.activeElement === chatbotInput) {
+            chatbotInput.blur();
+        }
     }
 }
 
 // Close chatbot - multiple event handlers for reliability
-if (chatbotClose) {
-    // Click handler
-    chatbotClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        closeChatbot();
-        return false;
-    });
+function setupCloseButton() {
+    const closeBtn = document.getElementById('chatbotClose');
+    if (!closeBtn) return;
     
-    // Touch start - immediate response
-    chatbotClose.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+    function handleClose(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
         closeChatbot();
         return false;
-    }, { passive: false });
+    }
     
-    // Touch end - backup
-    chatbotClose.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        closeChatbot();
-        return false;
-    }, { passive: false });
+    // Remove all existing event listeners by cloning
+    const newCloseBtn = closeBtn.cloneNode(true);
+    closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
     
-    // Mouse down - for desktop
-    chatbotClose.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeChatbot();
-        return false;
-    });
+    // Add fresh event listeners
+    newCloseBtn.addEventListener('click', handleClose, { capture: true, once: false });
+    newCloseBtn.addEventListener('touchstart', handleClose, { passive: false, capture: true, once: false });
+    newCloseBtn.addEventListener('touchend', handleClose, { passive: false, capture: true, once: false });
+    newCloseBtn.addEventListener('mousedown', handleClose, { capture: true, once: false });
+    newCloseBtn.addEventListener('pointerdown', handleClose, { capture: true, once: false });
+}
+
+// Setup close button when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCloseButton);
+} else {
+    setupCloseButton();
+}
+
+// Ensure chatbot is closed on page load
+window.addEventListener('load', () => {
+    if (chatbotContainer) {
+        chatbotContainer.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.height = '';
+    }
+});
+
+// Also ensure it's closed immediately
+if (chatbotContainer) {
+    chatbotContainer.classList.remove('active');
+    chatbotContainer.style.display = 'none';
 }
 
 // Close chatbot when clicking/touching outside (mobile-friendly)

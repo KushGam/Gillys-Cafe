@@ -1150,7 +1150,12 @@ section {
 }
 
 .chatbot-container.active {
-    display: flex;
+    display: flex !important;
+}
+
+/* Ensure chatbot is hidden by default */
+.chatbot-container:not(.active) {
+    display: none !important;
 }
 
 .chatbot-header {
