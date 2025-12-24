@@ -1,1 +1,17 @@
-{"version":2,"buildCommand":null,"outputDirectory":".","framework":null,"rewrites":[{"source":"/admin","destination":"/admin.html"},{"source":"/(.*)","destination":"/index.html"}]}
+{
+  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+
